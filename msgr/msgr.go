@@ -14,8 +14,12 @@ type Payload struct {
 	ParseMode string `json:"parse_mode"`
 }
 
-func Send(botToken, chatID, message string) error {
-	apiURL := fmt.Sprintf("https://api.telegram.org/bot%s/sendMessage", botToken)
+type TgMsgr struct {
+	BotToken string
+}
+
+func (msgr *TgMsgr) Send(chatID, message string) error {
+	apiURL := fmt.Sprintf("https://api.telegram.org/bot%s/sendMessage", msgr.BotToken)
 
 	payload := Payload{
 		ChatID:    chatID,
